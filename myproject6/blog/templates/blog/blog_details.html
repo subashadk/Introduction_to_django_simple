@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blog details</title>
+</head>
+<body>
+    <h1>blog details</h1>
+    {% comment %} text filter {% endcomment %}
+    <P><b> title(normal):{{post.title}} </b></P>
+     <P><b> uppercase:{{post.title|upper}} </b></P>
+     <P><b> lowercase:{{post.title|lower}} </b></P>
+     <P><b> capital:{{post.title|capfirst}} </b></P>
+     <P><b> title:{{post.title|title}} </b></P>
+     <P><b> truncatechars:{{post.title|truncatechars:5}} </b></P>
+     <P><b> linebreak:{{post.title|linebreaks}} </b></P>
+     <hr>
+     <P><b> orginal price :{{post.price}} </b></P>
+     <P><b> orginal price(5) :{{post.price|add:5}} </b></P>
+     {% comment %} division {% endcomment %}
+
+     {% if post.number|divisibleby:2%}
+         <p>The number is even.</p>
+     {% else %}
+         <p>The number is odd.</p>
+     {% endif %}
+
+     {% comment %} list {% filter  %}{% endfilter %} {% endcomment %}
+     <P><b> tags:{{post.tags|first}} </b></P>
+     <P><b> tags:{{post.tags|last}} </b></P>
+     <P> <b> tagslength ; {{post.tags|length}}</b> </P>
+     <P> <b> slice ; {{post.tags|slice:":2"}} </b> </P>
+     <P> <b> join ; {{post.tags|join:" is "}} </b> </P>
+     <hr>
+     {% comment %} pluralize {% endcomment %}
+     <P> <b> author avilable :{{post.author|yesno:"Yes,No,maybe "}}
+              </b> </P>
+    <P> <b> comments_count :{{post.comments_count}} comment{{pluralize}} </b> </P>
+
+    {% comment %} date time filter {% endcomment %}
+    <P> <b> created_at :{{post.created_at}} </b> </P>
+    <P> <b> formated date :{{post.created_at|date:"D d M Y"}} </b> </P>
+    <P> <b> formated time :{{post.created_at|time:"H:i:s"}} </b> </P>
+    {% comment %} enconding  {% endcomment %}
+    <P> title encode {{post.title|urlencode}} </P>
+</body>
+</html>

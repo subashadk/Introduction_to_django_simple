@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}blog page {% endblock title %}
+
+{% block content %}
+    <h1>About My Blog page</h1>
+    <p>This is the about page of my blog. Here you can learn more about the purpose and mission of this blog.</p>
+    {% comment %} <img src="{% static 'images/about.jpg' %}" alt="About Image"> {% endcomment %}
+    {% comment %} {% regroup  by  as  %} {% endcomment %}
+    {% regroup students by class as grouped_students %}
+    <ul>
+        {% for group in grouped_students %}
+        <li> class {{group.grouper}}
+            <ul>
+                {% for student in group.list %}
+                <li>{{student.name}} - {{student.rollno}}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+
+    </ul>
+    <p> 
+        progress : {% widthratio 50 100 100 %}%
+    </p>
+    {% spaceless %}
+    <div>
+        <span> This is a sample text with    extra spaces. </span>
+        <span> This is another sample text with    extra spaces. </span>
+    </div>
+    {% endspaceless %}
+    {% filter upper %}
+    subash
+    {% endfilter %}
+
+    {% for student in  students%}
+    <p>{{student.name|upper}} 
+    {% endfor %}
+{% endblock %}

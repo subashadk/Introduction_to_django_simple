@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>template3</title>
+</head>
+<body>
+    <h1>template3</h1>
+    <p> {{today}}</p>
+    {% comment %} if else {% endcomment %}
+    {% if blogs.1.is_featured %}
+        <h2>Featured Blog {{ blogs.0.title }}</h2>
+    {% else %}
+        <h2>Not Featured Blog {{ blogs.0.title }}</h2>
+    {% endif %}
+
+    {% comment %} for loop {% endcomment %}
+    <ul>
+            {% for blog in blogs%}
+        <li>{{ forloop.counter}}.{{blog.title}} -{{blog.author}}</li>
+        {% empty %}
+            <li>No blogs available.</li>
+        {% endfor %}
+    </ul>
+    {% comment %} with {% endcomment %}
+    {% with total_blogs=blogs|length %}
+        <p>Total Blogs: {{ total_blogs }}</p>
+    {% endwith %}
+    {% comment %} {% cycle  %} {% endcomment %}
+    <hr>
+    <table border="1" cellpadding="5" cellspacing="0"> 
+        {% for blog in blogs %}
+        <tr style="background-color: {% cycle 'lightblue' 'lightgreen' %};">
+            <td>{{ forloop.counter }}</td>
+            <td>{{ blog.title }}</td>
+            <td>{{ blog.author }}</td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+    {% comment %} First OF {% endcomment %}
+
+    <P>author: {{ blogs.1.author }}</P>
+    <P> AUthor {% firstof blog.1.author "ABC"%}</P>
+    {% comment %} varbatim{{}} {% endcomment %}
+    {% verbatim %}
+    <P> {{ blogs.1.author }}</P>
+    {% endverbatim %}
+
+    {% comment %} {% autoescape off %}{% endautoescape %} {% endcomment %}
+    <p> default(safe escape ): {{html_code}}</p>
+    
+</body>
+</html>
